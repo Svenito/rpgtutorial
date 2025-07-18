@@ -3,39 +3,37 @@ extends CharacterBody2D
 var speed = 45
 var chasing = false
 var player = null
+var last_direction = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	var movement = direction_to_player()
+	var direction = direction_to_player()
+	var anim = $AnimatedSprite2D
 	if chasing:
 		position += (player.position - position) / speed
-
-		if movement == Vector2.UP:
-			$AnimatedSprite2D.play(&"walk_back")
-		elif movement == Vector2.DOWN:
-			$AnimatedSprite2D.play(&"walk_front")
-		elif movement == Vector2.LEFT:
-			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.play(&"walk_side")
-		elif movement == Vector2.RIGHT:
-			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.play(&"walk_side")
+		last_direction = direction
+	
+		if direction == Vector2.UP:
+			anim.play(&"walk_back")
+		elif direction == Vector2.DOWN:
+			anim.play(&"walk_front")
+		else:
+			anim.flip_h = direction == Vector2.LEFT
+			anim.play(&"walk_side")
 	else:
-		if movement == Vector2.UP:
-			$AnimatedSprite2D.play(&"idle_back")
-		elif movement == Vector2.DOWN:
-			$AnimatedSprite2D.play(&"idle_front")
-		elif movement == Vector2.LEFT:
-			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.play(&"idle_side")
-		elif movement == Vector2.RIGHT:
-			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.play(&"idle_side")
+		if last_direction == Vector2.UP:
+			anim.play(&"idle_back")
+		elif last_direction == Vector2.DOWN:
+			anim.play(&"idle_front")
+		else:
+			anim.flip_h = direction == Vector2.LEFT
+			anim.play(&"idle_side")
 	move_and_slide()
 	
 func direction_to_player() -> Vector2:	
-	var movement = Vector2.ZERO
 	if not player:
-		return movement
+		return Vector2.ZERO
+	
+	var movement = Vector2.ZERO
 	var distances = Vector2(position.x - player.position.x, position.y - player.position.y)
 
 	if abs(distances.x) > abs(distances.y):
@@ -52,8 +50,7 @@ func direction_to_player() -> Vector2:
 	
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	player = body
-	chasing = true
-	
+	chasing = true	
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	player = null

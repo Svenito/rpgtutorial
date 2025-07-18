@@ -1,52 +1,48 @@
 extends CharacterBody2D
 
 const SPEED = 100
-var current_dir = "none"
+var last_dir = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	player_movement(delta)
 	
 func player_movement(delta: float):
+	var is_moving = true
+	var current_dir = Vector2.ZERO
 	
-	velocity.x = 0
-	velocity.y = 0
-	if Input.is_action_pressed("ui_right"):		
-		play_anim(true)
-		current_dir = "right"
-		velocity.x = SPEED
+	if Input.is_action_pressed("ui_right"):
+		current_dir = Vector2.RIGHT
 	elif Input.is_action_pressed("ui_left"):
-		play_anim(true)
-		current_dir = "left"
-		velocity.x = -SPEED
+		current_dir = Vector2.LEFT
 	elif Input.is_action_pressed("ui_up"):
-		play_anim(true)
-		current_dir = "up"
-		velocity.y = -SPEED
+		current_dir = Vector2.UP
 	elif Input.is_action_pressed("ui_down"):
-		play_anim(true)
-		current_dir = "down"
-		velocity.y = SPEED
+		current_dir = Vector2.DOWN
 	else:
-		play_anim(false)	
+		is_moving = false
+		
+	if is_moving:
+		last_dir = current_dir
+		
+	velocity = current_dir * SPEED
+	play_anim(is_moving, last_dir)
 	move_and_slide()
 
-func play_anim(is_moving: bool):
+func play_anim(is_moving: bool, current_dir: Vector2):
 	var anim = $AnimatedSprite2D
-	anim.flip_h = false	
-	
-	if current_dir == "up":
+	if current_dir == Vector2.UP:
 		if is_moving:
-			anim.play("walk_back")
+			anim.play(&"walk_back")
 		else:
-			anim.play("idle_back")
-	elif current_dir == "down":
+			anim.play(&"idle_back")
+	elif current_dir == Vector2.DOWN:
 		if is_moving:
-			anim.play("walk_front")
+			anim.play(&"walk_front")
 		else:
-			anim.play("idle_front")
+			anim.play(&"idle_front")
 	else:
-		anim.flip_h = current_dir == "left"
+		anim.flip_h = current_dir == Vector2.LEFT
 		if is_moving:
-			anim.play("walk_side")
+			anim.play(&"walk_side")
 		else:
-			anim.play("idle_side")
+			anim.play(&"idle_side")
