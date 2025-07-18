@@ -43,24 +43,39 @@ texture = ExtResource("2_k0juu")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mrxx"]
 texture = ExtResource("3_71j4m")
 0:0/0 = 0
+0:0/0/y_sort_origin = 5
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.33816, 8, 2.33816, 8, 6.29506, -8, 6.29506)
 0:1/0 = 0
+0:1/0/y_sort_origin = 5
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.33816, 8, 2.33816, 8, 8, -8, 8)
 5:0/0 = 0
+5:0/0/y_sort_origin = 5
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.33816, 8, 2.33816, 8, 8, -8, 8)
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
+0:5/0/y_sort_origin = 15
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.33816, 8, 2.33816, 8, 8, -8, 8)
 6:7/size_in_atlas = Vector2i(2, 2)
 6:7/0 = 0
+6:7/0/y_sort_origin = 12
+6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-13.2196, 7.73393, 11.0613, 7.73393, 10.3419, 15.6477, -11.421, 15.1081)
 8:6/size_in_atlas = Vector2i(2, 3)
 8:6/0 = 0
+8:6/0/y_sort_origin = 16
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.38498, 15.1081, 7.28428, 15.4678, 5.48569, 21.0435, -4.76626, 20.8636)
 10:7/size_in_atlas = Vector2i(2, 2)
 10:7/0 = 0
+10:7/0/y_sort_origin = 6
+10:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.7807, 1.79859, -0.0899296, 1.79859, 11.6009, 2.1583, 9.8023, 9.71237, -7.82385, 10.0721, -11.421, 6.29506)
 
 [sub_resource type="TileSet" id="TileSet_7r4gi"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_qfnet")
 sources/1 = SubResource("TileSetAtlasSource_i7141")
 sources/2 = SubResource("TileSetAtlasSource_4mrxx")
 
 [node name="world" type="Node2D"]
-position = Vector2(-31, -210)
+y_sort_enabled = true
 
 [node name="ground" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -73,6 +88,7 @@ tile_map_data = PackedByteArray("AAAqAAAAAAABAAUAAAAqAAEAAAABAAUAAAAqAAIAAAABAAU
 tile_set = SubResource("TileSet_7r4gi")
 
 [node name="ysort" type="TileMapLayer" parent="."]
+y_sort_enabled = true
 use_parent_material = true
 tile_map_data = PackedByteArray("AAALAAsAAgAKAAcAAAANAAsAAgAKAAcAAAAPAAsAAgAKAAcAAAAaAAYAAgAKAAcAAAAaABkAAgAKAAcAAAALABkAAgAKAAcAAAADABIAAgAKAAcAAAAxABEAAgAKAAcAAAAoAAYAAgAKAAcAAAA9AA8AAgAKAAcAAAA7AB4AAgAKAAcAAAAvABoAAgAKAAcAAAAoAB8AAgAKAAcAAAAFABIAAgAAAAUAAAAKAAkAAgAAAAUAAAANAAkAAgAAAAUAAAAQAAkAAgAAAAUAAAATAAkAAgAAAAUAAAAgAAcAAgAAAAUAAAAaAAgAAgAAAAUAAAATABgAAgAAAAUAAAAVABQAAgAAAAUAAAAiABYAAgAAAAUAAAAoABkAAgAAAAUAAAAsABcAAgAAAAUAAAAxAAwAAgAAAAUAAAArAAoAAgAAAAUAAAA3AAwAAgAAAAUAAAA9AA0AAgAAAAUAAAA5AB0AAgAAAAUAAAADAAUAAgAGAAcAAAADAAgAAgAGAAcAAAAEAAgAAgAGAAcAAAAFAAgAAgAGAAcAAAA0AAMAAgAGAAcAAAA2AAMAAgAGAAcAAAAlAAgAAgAGAAcAAAAsAA8AAgAGAAcAAAAXAAQAAgAIAAYAAAAXAAkAAgAIAAYAAAArAAEAAgAIAAYAAAANABQAAgAIAAYAAAAIABYAAgAIAAYAAAAbABcAAgAIAAYAAAAeABcAAgAIAAYAAAApAA4AAgAIAAYAAAAvABEAAgAIAAYAAAA0ABgAAgAIAAYAAAAxABkAAgAIAAYAAAAxABgAAgAIAAYAAAAKABYAAgAAAAEAAAAJABUAAgAAAAEAAAArAAMAAgAAAAEAAAAVAAsAAgAAAAEAAAAhAAoAAgAAAAEAAAAhAAkAAgAAAAEAAAAiAAsAAgAAAAEAAAAiAAwAAgAAAAEAAAAjAAwAAgAAAAEAAAAkAAwAAgAAAAEAAAAlAA0AAgAAAAEAAAAmAA4AAgAAAAEAAAASAA8AAgAFAAAAAAAQAA4AAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_7r4gi")
