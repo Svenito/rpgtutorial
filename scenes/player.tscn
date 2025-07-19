@@ -225,7 +225,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_back",
 "speed": 5.0
 }, {
@@ -242,7 +242,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ur7pv")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_front",
 "speed": 5.0
 }, {
@@ -259,7 +259,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jej6c")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_side",
 "speed": 5.0
 }, {
@@ -434,8 +434,6 @@ y_sort_enabled = true
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_lxlsd")
 animation = &"attack_back"
-frame = 3
-frame_progress = 0.240548
 offset = Vector2(0, -19)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -452,6 +450,7 @@ debug_color = Color(0.434924, 0.480417, 0.93383, 0.42)
 [node name="attack_cooldown" type="Timer" parent="."]
 wait_time = 0.5
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
