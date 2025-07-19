@@ -54,7 +54,7 @@ texture = ExtResource("3_71j4m")
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.33816, 8, 2.33816, 8, 8, -8, 8)
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
-0:5/0/y_sort_origin = 15
+0:5/0/y_sort_origin = 20
 0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.6009, 14.3887, 8.00371, 14.2088, 12.8599, 19.4247, 9.98216, 26.2594, -7.46414, 25.8997, -11.9606, 21.4032)
 6:7/size_in_atlas = Vector2i(2, 2)
 6:7/0 = 0
@@ -95,7 +95,9 @@ tile_map_data = PackedByteArray("AAALAAsAAgAKAAcAAAANAAsAAgAKAAcAAAAPAAsAAgAKAAc
 tile_set = SubResource("TileSet_7r4gi")
 
 [node name="player" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(21, 98)
+position = Vector2(155, 262)
 
 [node name="enemy" parent="." instance=ExtResource("5_71j4m")]
-position = Vector2(35, 39)
+position = Vector2(261, 256)
+
+[connection signal="attack" from="enemy" to="player" method="_on_enemy_attack"]

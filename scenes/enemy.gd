@@ -4,6 +4,10 @@ var speed = 45
 var chasing = false
 var player = null
 var last_direction = Vector2.ZERO
+var health = 100
+var player_in_range = false
+
+signal attack(damage)
 
 func _physics_process(delta: float) -> void:
 	var direction = direction_to_player()
@@ -27,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			anim.flip_h = direction == Vector2.LEFT
 			anim.play(&"idle_side")
-	move_and_slide()
+	move_and_slide()	
 	
 func direction_to_player() -> Vector2:	
 	if not player:
@@ -55,3 +59,18 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	player = null
 	chasing = false
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.name == "player":
+		print("player in range")
+		player_in_range = true
+		$attack.start()
+
+func _on_hitbox_body_exited(body: Node2D) -> void:
+	if body.name == "player":
+		player_in_range = false
+		$attack.stop()
+
+func _on_attack_timeout() -> void:
+	if player_in_range:
+		attack.emit(10)

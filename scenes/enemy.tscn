@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dtfo0vp7gilfc"]
+[gd_scene load_steps=42 format=3 uid="uid://dtfo0vp7gilfc"]
 
 [ext_resource type="Texture2D" uid="uid://c6mq55qk4lrmy" path="res://art/characters/slime.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://ct70b7ex2bhbe" path="res://scenes/enemy.gd" id="1_md0e3"]
@@ -292,6 +292,9 @@ radius = 37.0135
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ra3w"]
+radius = 13.0384
+
 [node name="enemy" type="CharacterBody2D"]
 script = ExtResource("1_md0e3")
 
@@ -313,5 +316,17 @@ debug_color = Color(0.564706, 0.231373, 0.443137, 0.356863)
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_md0e3")
 
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_4ra3w")
+debug_color = Color(0.491147, 0.43826, 0.986212, 0.42)
+
+[node name="attack" type="Timer" parent="."]
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
