@@ -433,7 +433,9 @@ debug_color = Color(0.964706, 0, 0, 0.419608)
 y_sort_enabled = true
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_lxlsd")
-animation = &"idle_side"
+animation = &"attack_back"
+frame = 3
+frame_progress = 0.240548
 offset = Vector2(0, -19)
 
 [node name="Camera2D" type="Camera2D" parent="."]
